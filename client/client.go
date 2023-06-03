@@ -22,6 +22,7 @@ func main() {
 		log.Fatal("Both -cert and -key flags must be provided")
 	}
 
+	// Load client certificate and key
 	cert, err := tls.LoadX509KeyPair(clientCertFile, clientKeyFile)
 	if err != nil {
 		log.Fatal(err)
@@ -29,11 +30,13 @@ func main() {
 
 	tls.GOSTInstall()
 
+	// Configure TLS connection
 	config := &tls.Config{
 		Certificates:       []tls.Certificate{cert},
 		InsecureSkipVerify: true,
 	}
 
+	// Connect to the server
 	conn, err := tls.Dial("tcp", serverAddr, config)
 	if err != nil {
 		log.Fatal(err)
@@ -42,8 +45,10 @@ func main() {
 
 	log.Println("Connected to server")
 
+	// Read user input from stdin
 	reader := bufio.NewReader(os.Stdin)
 
+	// Join the "Home" room
 	joinMessage := fmt.Sprintf("JOIN Home")
 	_, err = conn.Write([]byte(joinMessage + "\n"))
 	if err != nil {
@@ -55,8 +60,10 @@ func main() {
 		conn: conn,
 	}
 
+	// Start reading messages from the server in a separate goroutine
 	go readMessages(client)
 
+	// Read user input and send messages to the server
 	for {
 		message, _ := reader.ReadString('\n')
 		message = strings.TrimSpace(message)
@@ -75,6 +82,7 @@ func main() {
 	log.Println("Disconnected from server")
 }
 
+// readMessages reads messages from the server and prints them to the console
 func readMessages(client *Client) {
 	reader := bufio.NewReader(client.conn)
 
@@ -91,6 +99,7 @@ func readMessages(client *Client) {
 	log.Println("Disconnected from server")
 }
 
+// Client represents a connected client
 type Client struct {
 	conn net.Conn
 }
