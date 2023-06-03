@@ -1,2 +1,2 @@
 # Internet Relay Chat Secure
-Internet Relay Chat (IRC) via TLS/SSL
+Minimalist Internet Relay Chat (IRC) via TLS/SSL
