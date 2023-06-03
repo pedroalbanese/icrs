@@ -214,6 +214,7 @@ func leaveRoom(client *Client) {
 }
 
 func notifyClientLeft(room *Room, client *Client) {
+	// Notify all clients in the room that a client has left
 	for _, c := range room.clients {
 		c.conn.Write([]byte(fmt.Sprintf("%s left the room.\n", client.username)))
 	}
@@ -224,6 +225,7 @@ func sendMessage(client *Client, message string) {
 	room.mu.Lock()
 	defer room.mu.Unlock()
 
+	// Send the message to all clients in the same room except the sender
 	for _, c := range room.clients {
 		if c != client {
 			c.conn.Write([]byte(fmt.Sprintf("%s: %s\n", client.username, message)))
@@ -232,12 +234,14 @@ func sendMessage(client *Client, message string) {
 }
 
 func broadcastMessage(message string) {
+	// Send the message to all connected clients
 	for _, client := range clients {
 		fmt.Fprintln(client.conn, message)
 	}
 }
 
 func removeClient(client Client) {
+	// Remove the client from the list of connected clients
 	for i, c := range clients {
 		if c == client {
 			clients = append(clients[:i], clients[i+1:]...)
@@ -247,6 +251,7 @@ func removeClient(client Client) {
 }
 
 func getClientSKID(cert *x509.Certificate) string {
+	// Get the Subject Key Identifier (SKID) from the client certificate
 	for _, ext := range cert.Extensions {
 		if ext.Id.Equal(subjectKeyIdentifierOID) {
 			var skid []byte
@@ -259,9 +264,10 @@ func getClientSKID(cert *x509.Certificate) string {
 }
 
 func printClientCertPEM(cert *x509.Certificate) {
+	// Print the client certificate in PEM format
 	block := &pem.Block{
 		Type:  "CERTIFICATE",
-		Bytes: cert.Raw,
+			Bytes: cert.Raw,
 	}
 
 	fmt.Println(string(pem.EncodeToMemory(block)))
