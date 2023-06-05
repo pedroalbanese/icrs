@@ -10,9 +10,9 @@ Minimalist and Simplified Internet Relay Chat (IRC) via TLS (RFC 7194)
    |       CSR             |       |       CSR           |
    |                       |       |                     |
    V                       V       V                     V
- +------+                 +-------+                 +--------+
- | AKID |                 | AKID  |                 | AKID   |
- +------+                 +-------+                 +--------+
+ +------+                 +-------+                  +--------+
+ | AKID |                 | AKID  |                  | AKID   |
+ +------+                 +-------+                  +--------+
    |                        |                            |
    |                        |                            |
    V                        |                            V
