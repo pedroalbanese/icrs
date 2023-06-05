@@ -13,11 +13,11 @@ Minimalist and Simplified Internet Relay Chat (IRC) via TLS (RFC 7194)
  +------+                 +-------+                 +--------+
  | AKID |                 | AKID  |                 | AKID   |
  +------+                 +-------+                 +--------+
-   |                        |                        |
-   |                        |                        |
-   V                        |                        V
- Chat Acessível             |                Acesso Negado
- a partir do AKID           |                Sem AKID válido
+   |                        |                            |
+   |                        |                            |
+   V                        |                            V
+ Chat Acessível             |                    Acesso Negado
+ a partir do AKID           |                    Sem AKID válido
                             |
                             V
                       +------------+
