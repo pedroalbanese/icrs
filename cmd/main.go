@@ -18,7 +18,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/chzyer/readline"
+	"github.com/pedroalbanese/readline"
+	"github.com/pedroalbanese/color"
 )
 
 type Client struct {
@@ -319,7 +320,8 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 	}
 
 	// Extract the username from the client certificate
-	username := strings.TrimPrefix(clientCert.Subject.CommonName, "CN=")
+//	username := strings.TrimPrefix(clientCert.Subject.CommonName, "CN=")
+	username := "@" + strings.TrimPrefix(clientCert.Subject.CommonName, "CN=")
 
 	client := Client{
 		conn:        conn,
@@ -367,7 +369,7 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 				break 
 			} else if strings.TrimSpace(message) == "LIST" {
 				response := listUsers(client.room)
-				_, err := client.conn.Write([]byte(response + "\n"))
+				_, err := client.conn.Write([]byte(response))
 				if err != nil {
 					log.Println("Error sending user list:", err)
 				}
@@ -389,14 +391,66 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 	removeClient(&client)
 }
 
+
+
 func printMessage(message string) {
-	currentTime := time.Now().Format("15:04:05")
-	fmt.Printf("[%s] %s", currentTime, message)
+//	currentTime := time.Now().Format("15:04:05")
+//	fmt.Printf("[%s] %s", currentTime, message)
+//	fmt.Print(message)
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
+		fmt.Print(message)
+	} else {
+		currentTime := time.Now().Format("15:04:05")
+		gray := color.New(color.FgHiBlack)
+		gray.Printf("[%s] ", currentTime)
+		if strings.HasPrefix(message, "@") && strings.Contains(message, "#") {
+			split := strings.SplitN(message, "#", 2)
+			if split[0] != "Joined room" && split[0] != "Left room" {
+				red := color.New(color.FgHiWhite)
+				red.Print(split[0])
+				fmt.Print(":")
+				fmt.Print(split[1])
+				return
+			} else {
+				fmt.Print(split[0])
+				fmt.Print(":")
+				fmt.Print(split[1])
+				return
+			}
+		} else {
+			fmt.Print(message)
+		}
+	}
 }
 
 func printMessageln(message string) {
-	currentTime := time.Now().Format("15:04:05")
-	fmt.Printf("[%s] %s\n", currentTime, message)
+//	currentTime := time.Now().Format("15:04:05")
+//	fmt.Printf("[%s] %s\n", currentTime, message)
+//	fmt.Println(message)
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
+		fmt.Println(message)
+	} else {
+		currentTime := time.Now().Format("15:04:05")
+		gray := color.New(color.FgHiBlack)
+		gray.Printf("[%s] ", currentTime)
+		if strings.HasPrefix(message, "@") && strings.Contains(message, "#") {
+			split := strings.SplitN(message, "#", 2)
+			if split[0] != "Joined room" && split[0] != "Left room" {
+				red := color.New(color.FgHiWhite)
+				red.Print(split[0])
+				fmt.Print(":")
+				fmt.Println(split[1])
+				return
+			} else {
+				fmt.Print(split[0])
+				fmt.Print(":")
+				fmt.Println(split[1])
+				return
+			}
+		} else {
+			fmt.Println(message)
+		}
+	}
 }
 
 func isCertificateRevoked(cert *x509.Certificate, crl *pkix.CertificateList) (bool, time.Time) {
@@ -495,7 +549,8 @@ func sendMessage(client *Client, message string) {
 	// Send the message to all clients in the same room except the sender
 	for _, c := range room.clients {
 		if c != client {
-			c.conn.Write([]byte(fmt.Sprintf("%s: %s\n", client.username, message)))
+//			c.conn.Write([]byte(fmt.Sprintf("%s: %s\n", client.username, message)))
+			c.conn.Write([]byte(fmt.Sprintf("%s# %s\n", client.username, message)))
 		}
 	}
 }
