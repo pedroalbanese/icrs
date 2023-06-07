@@ -4,13 +4,12 @@ Minimalist Internet Relay Chat (IRC) via TLS (RFC 7194).
 
 Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time exchange of text messages between users connected to an IRC server. It functions as a network of virtual chat rooms where users can interact with other users in real time. The server acts as a router, ensuring that all messages are delivered to the correct recipients.
 
-```
-   +-----------------------+       +---------------------+
-   |   Certificado de      |       |      Servidor       |
-   |   Autoridade (CA)     |       |                     |
+```   +-----------------------+       +---------------------+
+   |   Certificate         |       |      Server         |
+   |   Authority (CA)      |       |                     |
    |                       |       |                     |
-   |       Assina          |       |       Gera          |
-   |       CSR             |       |       CSR           |
+   |   Sign                |       |   Generate          |
+   |   CSR                 |       |   CSR               |
    |                       |       |                     |
    V                       V       V                     V
  +------+                 +-------+                  +--------+
@@ -19,13 +18,14 @@ Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time e
    |                        |                            |
    |                        |                            |
    V                        |                            V
- Chat Acessível             |                    Acesso Negado
- a partir do AKID           |                    Sem AKID válido
+ Accessible Chat            |                    Access Denied
+ with AKID                  |                    No valid AKID
                             |
                             V
                       +------------+
                       |    Chat    |
                       +------------+
+
 ```
 
 ### Documentation
