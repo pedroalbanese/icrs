@@ -348,7 +348,14 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 		message = strings.TrimSpace(message)
 
 		if client.room == nil {
-			if strings.HasPrefix(message, "JOIN ") {
+			if strings.TrimSpace(message) == "LIST" {
+				response := listRooms()
+				_, err := client.conn.Write([]byte(response))
+				if err != nil {
+					log.Println("Error sending room list:", err)
+				}
+				
+			} else if strings.HasPrefix(message, "JOIN ") {
 				roomName := strings.TrimPrefix(message, "JOIN ")
 				room := findOrCreateRoom(roomName)
 				joinRoom(&client, room)
@@ -397,7 +404,7 @@ func printMessage(message string) {
 //	currentTime := time.Now().Format("15:04:05")
 //	fmt.Printf("[%s] %s", currentTime, message)
 //	fmt.Print(message)
-	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "Available rooms") || strings.HasPrefix(message, "-") {
 		fmt.Print(message)
 	} else {
 		currentTime := time.Now().Format("15:04:05")
@@ -427,7 +434,7 @@ func printMessageln(message string) {
 //	currentTime := time.Now().Format("15:04:05")
 //	fmt.Printf("[%s] %s\n", currentTime, message)
 //	fmt.Println(message)
-	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "Available rooms") || strings.HasPrefix(message, "-") {
 		fmt.Println(message)
 	} else {
 		currentTime := time.Now().Format("15:04:05")
@@ -534,6 +541,30 @@ func leaveRoom(client *Client) {
 	}
 }
 
+func listRooms() string {
+	nonEmptyRooms := make([]*Room, 0)
+
+	for _, room := range rooms {
+		if len(room.clients) > 0 {
+			nonEmptyRooms = append(nonEmptyRooms, room)
+		}
+	}
+
+	if len(nonEmptyRooms) == 0 {
+		return "No rooms available.\n"
+	}
+
+	var buffer bytes.Buffer
+	buffer.WriteString("Available rooms:\n")
+	for _, room := range nonEmptyRooms {
+		buffer.WriteString("- ")
+		buffer.WriteString(room.name)
+		buffer.WriteString("\n")
+	}
+
+	return buffer.String()
+}
+
 func notifyClientLeft(room *Room, client *Client) {
 	// Notify all clients in the room that a client has left
 	for _, c := range room.clients {
@@ -581,6 +612,15 @@ func removeClient(client *Client) {
 		}
 	}
 
+	// Send a notification message to the remaining clients
+	message := client.username + " left the chat"
+	for _, c := range client.room.clients {
+		_, err := c.conn.Write([]byte(message + "\n"))
+		if err != nil {
+			log.Println("Error sending message to client:", err)
+		}
+	}
+	
 	// Set the client's room reference to nil
 	client.room = nil
 }
