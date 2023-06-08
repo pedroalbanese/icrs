@@ -1,6 +1,6 @@
-# IRCS Daemon
-### Internet Relay Chat Secure
-Minimalist Internet Relay Chat (IRC) via TLS (RFC 7194).
+# IRCS Daemon (KDS)
+### Internet Relay Chat Secure and Key Distribution System
+Minimalist Inner Internet Relay Chat (IRC) via TLS (RFC 7194).
 
 Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time exchange of text messages between users connected to an IRC server. It functions as a network of virtual chat rooms where users can interact with other users in real time. The server acts as a router, ensuring that all messages are delivered to the correct recipients.
 
