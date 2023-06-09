@@ -1,4 +1,7 @@
 # IRCS Daemon (KDS)
+[![ISC License](http://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/pedroalbanese/ircs/blob/master/LICENSE.md) 
+[![GoDoc](https://godoc.org/github.com/pedroalbanese/ircs?status.png)](http://godoc.org/github.com/pedroalbanese/ircs)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pedroalbanese/ircs)](https://goreportcard.com/report/github.com/pedroalbanese/ircs)
 ### Internet Relay Chat Secure (Key Distribution System)
 Minimalist Internet Relay Chat (IRC) via Transport Layer Security (RFC 7194).
 
