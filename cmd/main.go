@@ -17,11 +17,9 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"errors"
 
 	"github.com/pedroalbanese/readline"
 	"github.com/pedroalbanese/color"
-	"github.com/pedroalbanese/gopass"
 )
 
 type Client struct {
@@ -51,12 +49,11 @@ var authorityKeyIdentifierOID = []int{2, 5, 29, 35}
 
 var (
 	certFile   = flag.String("cert", "", "Certificate file path.")
-	crlFile    = flag.String("crl", "", "Certificate revogation list.")
+	crlFile    = flag.String("crl", "", "Certificate revcation list.")
 	keyFile    = flag.String("key", "", "Private key file path.")
 	mode       = flag.String("mode", "client", "Mode: <server|client>")
 	serverAddr = flag.String("ipport", "localhost:8000", "Server address.")
 	strict     = flag.Bool("strict", false, "Restrict users.")
-	pwd        = flag.String("pwd", "", "Password. (for Private key PEM decryption)")
 )
 
 func init() {
@@ -68,71 +65,9 @@ func main() {
 
 	clientSKIDs = make(map[string]bool)
 
-	if  *keyFile != "" && *pwd == "" {
-		file, err := os.Open(*keyFile)
-		if err != nil {
-			log.Fatal(err)
-		}
-		info, err := file.Stat()
-		if err != nil {
-			log.Fatal(err)
-		}
-		buf := make([]byte, info.Size())
-		file.Read(buf)
-		var block *pem.Block
-		block, _ = pem.Decode(buf)
-		if block == nil {
-			errors.New("no valid private key found")
-		}
-		if IsEncryptedPEMBlock(block) {
-			print("Passphrase: ")
-			pass, _ := gopass.GetPasswd()
-			*pwd = string(pass)
-		}
-	}
-
-	file, err := os.Open(*keyFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	info, err := file.Stat()
-	if err != nil {
-		log.Fatal(err)
-	}
-	buf := make([]byte, info.Size())
-	file.Read(buf)
-	var block *pem.Block
-	block, _ = pem.Decode(buf)
-	if block == nil {
-		errors.New("no valid private key found")
-	}
-	var privPEM []byte
-	var privKeyBytes []byte
-	if IsEncryptedPEMBlock(block) {
-		privKeyBytes, err = DecryptPEMBlock(block, []byte(*pwd))
-		if err != nil {
-			log.Fatal(err)
-		}
-		privPEM = pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: privKeyBytes})
-	} else {
-		privPEM = buf
-	}
-	file, err = os.Open(*certFile)
-	if err != nil {
-		log.Println(err)
-	}
-	info, err = file.Stat()
-	if err != nil {
-		log.Println(err)
-	}
-	buf = make([]byte, info.Size())
-	file.Read(buf)
-	certPEM := buf
-
 	if *mode == "server" {
 		// Load the server certificate and private key
-//		cert, err := tls.LoadX509KeyPair(*certFile, *keyFile)
-		cert, err := tls.X509KeyPair(certPEM, privPEM)
+		cert, err := tls.LoadX509KeyPair(*certFile, *keyFile)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -202,8 +137,7 @@ func main() {
 		}
 
 		// Load client certificate and key
-//		cert, err := tls.LoadX509KeyPair(*certFile, *keyFile)
-		cert, err := tls.X509KeyPair(certPEM, privPEM)
+		cert, err := tls.LoadX509KeyPair(*certFile, *keyFile)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -267,7 +201,7 @@ func main() {
 				os.Exit(1)
 			}
 			defer rl.Close()
-
+			
 			rl.Stdout().Write([]byte("\033[1A\033[K"))
 			printMessageln(message)
 			_, err = conn.Write([]byte(message + "\n"))
@@ -414,14 +348,7 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 		message = strings.TrimSpace(message)
 
 		if client.room == nil {
-			if strings.TrimSpace(message) == "LIST" {
-				response := listRooms()
-				_, err := client.conn.Write([]byte(response))
-				if err != nil {
-					log.Println("Error sending room list:", err)
-				}
-				
-			} else if strings.HasPrefix(message, "JOIN ") {
+			if strings.HasPrefix(message, "JOIN ") {
 				roomName := strings.TrimPrefix(message, "JOIN ")
 				room := findOrCreateRoom(roomName)
 				joinRoom(&client, room)
@@ -464,12 +391,13 @@ func handleClient(conn net.Conn, serverCert *x509.Certificate, CRLFile *pkix.Cer
 	removeClient(&client)
 }
 
+
+
 func printMessage(message string) {
 //	currentTime := time.Now().Format("15:04:05")
 //	fmt.Printf("[%s] %s", currentTime, message)
 //	fmt.Print(message)
-//			fmt.Print("\r")
-	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "Available rooms") || strings.HasPrefix(message, "-") {
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
 		fmt.Print(message)
 	} else {
 		currentTime := time.Now().Format("15:04:05")
@@ -499,8 +427,7 @@ func printMessageln(message string) {
 //	currentTime := time.Now().Format("15:04:05")
 //	fmt.Printf("[%s] %s\n", currentTime, message)
 //	fmt.Println(message)
-//			fmt.Print("\r")
-	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "Available rooms") || strings.HasPrefix(message, "-") {
+	if strings.HasPrefix(message, "Users in the chat") || strings.HasPrefix(message, "-") {
 		fmt.Println(message)
 	} else {
 		currentTime := time.Now().Format("15:04:05")
@@ -607,30 +534,6 @@ func leaveRoom(client *Client) {
 	}
 }
 
-func listRooms() string {
-	nonEmptyRooms := make([]*Room, 0)
-
-	for _, room := range rooms {
-		if len(room.clients) > 0 {
-			nonEmptyRooms = append(nonEmptyRooms, room)
-		}
-	}
-
-	if len(nonEmptyRooms) == 0 {
-		return "No rooms available.\n"
-	}
-
-	var buffer bytes.Buffer
-	buffer.WriteString("Available rooms:\n")
-	for _, room := range nonEmptyRooms {
-		buffer.WriteString("- ")
-		buffer.WriteString(room.name)
-		buffer.WriteString("\n")
-	}
-
-	return buffer.String()
-}
-
 func notifyClientLeft(room *Room, client *Client) {
 	// Notify all clients in the room that a client has left
 	for _, c := range room.clients {
@@ -678,15 +581,6 @@ func removeClient(client *Client) {
 		}
 	}
 
-	// Send a notification message to the remaining clients
-	message := client.username + " left the chat"
-	for _, c := range client.room.clients {
-		_, err := c.conn.Write([]byte(message + "\n"))
-		if err != nil {
-			log.Println("Error sending message to client:", err)
-		}
-	}
-	
 	// Set the client's room reference to nil
 	client.room = nil
 }
