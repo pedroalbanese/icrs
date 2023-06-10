@@ -57,4 +57,49 @@ RFC 8446: Transport Layer Security (TLS) Protocol Version 1.3
 RFC 9058: MGM AEAD mode for 64 and 128 bit ciphers (E. Griboedova)
 ```
 
+## Usage
+Usage of joint:
+  -cert string
+        Certificate file path.
+  -crl string
+        Certificate revogation list.
+  -ipport string
+        Server address. (default "localhost:8000")
+  -key string
+        Private key file path.
+  -mode string
+        Mode: <server|client> (default "client")
+  -pwd string
+        Password. (for Private key PEM decryption)
+  -strict
+        Restrict users.
+        
+## Examples
+
+#### Asymmetric RSA keypair generation:
+```sh
+./edgetk -pkey keygen -bits 4096 [-pwd "pass"]
+```
+#### Generate Certificate Revocation List:
+```sh
+./edgetk -pkey crl -cert cacert.pem -key private.pem -crl old.crl serials.txt > NewCRL.crl
+```
+#### Generate Certificate Signing Request:
+```sh
+./edgetk -pkey req -key private.pem [-pwd "pass"] [-cert certificate.csr]
+```
+#### Sign CSR with CA Certificate:
+```sh
+./edgetk -pkey x509 -key private.pem -root cacert.pem -cert cert.csr > cert.crt
+```
+#### Daemon:
+Server
+```sh
+./ircs -mode server -key private.pem -cert root.pem -strict
+```
+Client
+```sh
+./ircs -key private2.pem -cert signedcert.crt
+```
+
 (TODO)
