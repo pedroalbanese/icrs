@@ -58,7 +58,8 @@ RFC 9058: MGM AEAD mode for 64 and 128 bit ciphers (E. Griboedova)
 ```
 
 ## Usage
-Usage of joint:
+```
+Usage of ircs:
   -cert string
         Certificate file path.
   -crl string
@@ -73,7 +74,8 @@ Usage of joint:
         Password. (for Private key PEM decryption)
   -strict
         Restrict users.
-        
+```
+
 ## Examples
 
 #### Asymmetric RSA keypair generation:
