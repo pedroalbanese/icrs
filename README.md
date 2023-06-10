@@ -66,7 +66,7 @@ Usage of ircs:
   -cert string
         Certificate file path.
   -crl string
-        Certificate revogation list.
+        Certificate revocation list.
   -ipport string
         Server address. (default "localhost:8000")
   -key string
