@@ -96,11 +96,11 @@ Usage of ircs:
 #### Daemon:
 Server
 ```sh
-./ircs -mode server -key private.pem -cert root.pem -strict
+./ircs -mode server -key private.pem -cert rootca.pem [-strict]
 ```
 Client
 ```sh
-./ircs -key private2.pem -cert signedcert.crt
+./ircs -key clientpriv.pem -cert signedcert.crt
 ```
 #### Generate Certificate Revocation List:
 ```sh
