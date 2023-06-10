@@ -83,11 +83,11 @@ Usage of ircs:
 
 #### Asymmetric RSA keypair generation:
 ```sh
-./edgetk -pkey keygen -bits 4096 [-pwd "pass"]
+./edgetk -pkey keygen -bits 4096 -priv private.pem [-pwd "pass"]
 ```
 #### Generate Self Signed Certificate:
 ```sh
-./edgetk -pkey certgen -key private.pem [-pwd "pass"] [-cert "output.crt"]
+./edgetk -pkey certgen -key private.pem [-pwd "pass"] [-cert "cacert.pem"]
 ```
 #### Generate Certificate Signing Request:
 ```sh
