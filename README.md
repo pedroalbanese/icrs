@@ -80,10 +80,6 @@ Usage of joint:
 ```sh
 ./edgetk -pkey keygen -bits 4096 [-pwd "pass"]
 ```
-#### Generate Certificate Revocation List:
-```sh
-./edgetk -pkey crl -cert cacert.pem -key private.pem -crl old.crl serials.txt > NewCRL.crl
-```
 #### Generate Certificate Signing Request:
 ```sh
 ./edgetk -pkey req -key private.pem [-pwd "pass"] [-cert certificate.csr]
@@ -101,5 +97,8 @@ Client
 ```sh
 ./ircs -key private2.pem -cert signedcert.crt
 ```
-
+#### Generate Certificate Revocation List:
+```sh
+./edgetk -pkey crl -cert cacert.pem -key private.pem -crl old.crl serials.txt > NewCRL.crl
+```
 (TODO)
