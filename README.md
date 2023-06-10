@@ -95,7 +95,7 @@ Usage of ircs:
 ```
 #### Sign CSR with CA Certificate:
 ```sh
-./edgetk -pkey x509 -key private.pem -root cacert.pem -cert cert.csr > cert.crt
+./edgetk -pkey x509 -key private.pem -root cacert.pem -cert certificate.csr > signedcert.crt
 ```
 #### Daemon:
 Server
