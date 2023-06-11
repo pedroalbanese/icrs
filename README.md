@@ -119,7 +119,7 @@ There are only four commands for the client to interact with the server:
         Example: JOIN Chat_Room
 
  2. LEAVE:
-        Description: This command allows the user to exit a specific chat room.
+        Description: This command allows the user to exit the current chat room.
         Example: LEAVE
 
  3. LIST:
