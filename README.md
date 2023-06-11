@@ -13,20 +13,20 @@ Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time e
 This chat application provides a high level of security through robust encryption mechanisms. All communication within the chat rooms is encrypted using industry-standard protocols. Additionally, this chat system does not support asynchronous operations, ensuring that all interactions occur in real time. It does not provide any advantages over other chat applications, except for the ability to enforce usage policies based on digital certification.
 
 ```
-   +-----------------------+      +----------------------+
-   |   Certificate         |      |        Server        |
-   |   Authority (CA)      |      |                      |
-   |                       |      |                      |
-   |   Sign                |      |    Generate          |
-   |   CSR                 |      |    CSR               |
-   |                       |      |                      |
-   V                       V      V                      V
+   +-----------------------+     +----------------------+
+   |   Certificate         |     |        Server        |
+   |   Authority (CA)      |     |                      |
+   |                       |     |                      |
+   |   Sign                |     |    Generate          |
+   |   CSR                 |     |    CSR               |
+   |                       |     |                      |
+   V                       V     V                      V
 +-------+                 +-------+                  +--------+
 | AKID  |                 | AKID  |                  | AKID   |
 +-------+                 +-------+                  +--------+
-   |                        |                            |
-   |                        |                            |
-   V                        |                            V
+   |                        |                           |
+   |                        |                           |
+   V                        |                           V
  Client                     |                     Access Denied
  with Certificate           |                     No valid AKID
                             |
