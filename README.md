@@ -12,6 +12,8 @@ Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time e
 
 This chat application provides a high level of security through robust encryption mechanisms. All communication within the chat rooms is encrypted using industry-standard protocols. Additionally, this chat system does not support asynchronous operations, ensuring that all interactions occur in real time. It does not provide any advantages over other chat applications, except for the ability to enforce usage policies based on digital certification.
 
+Unlike other IRCs, this application does not generate logs and does not store messages on the hard drive. This means that the sender of the messages can be absolutely certain that only those present in the room will read the message, and it will no longer be accessible thereafter.
+
 ```
    +-----------------------+     +----------------------+
    |   Certificate         |     |        Server        |
