@@ -111,7 +111,7 @@ This program requires either the [EDGE Toolkit](https://github.com/pedroalbanese
 ```
 ### Client
 ```sh
-./ircs -key clientpriv.pem -cert signedcert.crt
+./ircs -key clientpriv.pem -cert signedcert.crt [-ipport localhost:8000]
 ```
 
 ## Client Commands
