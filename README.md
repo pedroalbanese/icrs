@@ -86,7 +86,7 @@ This program requires either the [EDGE Toolkit](https://github.com/pedroalbanese
 
 #### Asymmetric RSA keypair generation:
 ```sh
-./edgetk -pkey keygen -bits 4096 -priv private.pem [-pwd "pass"]
+./edgetk -pkey keygen -bits 4096 [-priv private.pem] [-pwd "pass"]
 ```
 #### Generate Self Signed Certificate:
 ```sh
