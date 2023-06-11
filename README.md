@@ -97,12 +97,12 @@ Usage of ircs:
 ```sh
 ./edgetk -pkey x509 -key private.pem -root cacert.pem -cert certificate.csr > signedcert.crt
 ```
-#### Daemon:
-Server
+### Daemon:
+#### Server
 ```sh
-./ircs -mode server -key private.pem -cert rootca.pem [-strict]
+./ircs -mode server -key private.pem -cert cacert.pem [-strict]
 ```
-Client
+#### Client
 ```sh
 ./ircs -key clientpriv.pem -cert signedcert.crt
 ```
