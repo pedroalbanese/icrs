@@ -80,6 +80,7 @@ Usage of ircs:
 ```
 
 ## Examples
+This program requires either the [EDGE Toolkit](https://github.com/pedroalbanese/edgetk) or OpenSSL to generate keys and certificates.
 
 #### Asymmetric RSA keypair generation:
 ```sh
@@ -97,23 +98,23 @@ Usage of ircs:
 ```sh
 ./edgetk -pkey x509 -key private.pem -root cacert.pem -cert certificate.csr > signedcert.crt
 ```
-### Daemon
-#### Server
-```sh
-./ircs -mode server -key private.pem -cert cacert.pem [-strict]
-```
-#### Client
-```sh
-./ircs -key clientpriv.pem -cert signedcert.crt
-```
 #### Generate Certificate Revocation List:
 ```sh
 ./edgetk -pkey crl -cert cacert.pem -key private.pem -crl old.crl serials.txt > NewCRL.crl
 ```
+## Daemon
+### Server
+```sh
+./ircs -mode server -key private.pem -cert cacert.pem [-strict]
+```
+### Client
+```sh
+./ircs -key clientpriv.pem -cert signedcert.crt
+```
 
 ## Client Commands
 There are only four commands for the client to interact with the server:
-```sh
+```
  1. JOIN <room_name>:
         Description: This command allows the user to enter a specific chat room.
         Example: JOIN Chat_Room
