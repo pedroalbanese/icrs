@@ -31,17 +31,17 @@ Unlike other IRCs, this application does not generate logs and does not store me
    V                        |                           V
  Client                     |                     Access Denied
  with Certificate           |                     No valid AKID
-                            |
-                            V
-                      +------------+
-                      |  CRL       |
+   |                        |
+   |                        V
+   |                  +------------+
+   +----------------> |  CRL       |
                       |  Check     |
                       +------------+
                             |
                             |     +---------------------+
                             |     |    Revocation List  |
                             +---->|                     |
-                                  |    Not after XXX    |
+                                  |    Not after XXXX   |
                                   +---------------------+
                                   |
                                   V
