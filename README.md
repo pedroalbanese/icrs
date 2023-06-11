@@ -10,6 +10,8 @@ Minimalist Internet Relay Chat (IRC) via Transport Layer Security (RFC 7194).
 
 Internet Relay Chat (IRC) is a text-based chat protocol that enables real-time exchange of text messages between users connected to an IRC server. It functions as a network of virtual chat rooms where users can interact with other users in real time. The server acts as a router, ensuring that all messages are delivered to the correct recipients.
 
+This chat application provides a high level of security through robust encryption mechanisms. All communication within the chat rooms is encrypted using industry-standard protocols. Additionally, this chat system does not support asynchronous operations, ensuring that all interactions occur in real time.
+
 ```
    +-----------------------+      +----------------------+
    |   Certificate         |      |        Server        |
