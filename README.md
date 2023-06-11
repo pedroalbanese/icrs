@@ -97,7 +97,7 @@ Usage of ircs:
 ```sh
 ./edgetk -pkey x509 -key private.pem -root cacert.pem -cert certificate.csr > signedcert.crt
 ```
-### Daemon:
+### Daemon
 #### Server
 ```sh
 ./ircs -mode server -key private.pem -cert cacert.pem [-strict]
@@ -110,4 +110,27 @@ Usage of ircs:
 ```sh
 ./edgetk -pkey crl -cert cacert.pem -key private.pem -crl old.crl serials.txt > NewCRL.crl
 ```
+
+## Client Commands
+There are only four commands for the client to interact with the server:
+```sh
+ 1. JOIN <room_name>:
+        Description: This command allows the user to enter a specific chat room.
+        Example: JOIN Chat_Room
+
+ 2. LEAVE:
+        Description: This command allows the user to exit a specific chat room.
+        Example: LEAVE
+
+ 3. LIST:
+        Description: When executed inside a chat room, this command lists the 
+        participants currently present in the room. When executed outside of a 
+        room, it lists the available chat rooms for the user to choose from.
+        Example: LIST
+
+ 4. QUIT:
+        Description: This command allows the user to exit the chat system entirely.
+        Example: QUIT
+```
+
 (TODO)
