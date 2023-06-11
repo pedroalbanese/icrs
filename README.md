@@ -21,9 +21,9 @@ This chat application provides a high level of security through robust encryptio
    |   CSR                 |     |    CSR               |
    |                       |     |                      |
    V                       V     V                      V
-+-------+                 +-------+                  +--------+
-| AKID  |                 | AKID  |                  | AKID   |
-+-------+                 +-------+                  +--------+
++-------+                 +-------+                 +--------+
+| AKID  |                 | AKID  |                 | AKID   |
++-------+                 +-------+                 +--------+
    |                        |                           |
    |                        |                           |
    V                        |                           V
