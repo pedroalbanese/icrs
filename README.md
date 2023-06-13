@@ -138,4 +138,154 @@ There are only four commands for the client to interact with the server:
         Example: QUIT
 ```
 
+## Q Code
+```
+    QRA: What is the name of your station?
+        Description: This code is used to ask the other station about the name of their station.
+        Example: QRA What is the name of your station?
+
+    QRB: What is the distance to my station?
+        Description: This code is used to ask the other station about the distance to your station.
+        Example: QRB What is the distance to my station?
+
+    QRG: What is my exact frequency?
+        Description: This code is used to ask the other station about the exact frequency of your transmission.
+        Example: QRG What is my exact frequency?
+
+    QRH: Does my frequency vary?
+        Description: This code is used to ask the other station if your frequency is varying.
+        Example: QRH Does my frequency vary?
+
+    QRI: What is the tone of my transmission?
+        Description: This code is used to ask the other station about the tone of your transmission.
+        Example: QRI What is the tone of my transmission?
+
+    QRJ: Can you copy me well?
+        Description: This code is used to ask the other station if they can copy your signals well.
+        Example: QRJ Can you copy me well?
+
+    QRK: What is the readability of my signals?
+        Description: This code is used to ask the other station about the readability of your signals.
+        Example: QRK What is the readability of my signals?
+
+    QRL: Are you busy?
+        Description: This code is used to ask the other station if they are busy.
+        Example: QRL Are you busy?
+
+    QRM: Are you being interfered with?
+        Description: This code is used to ask the other station if they are being interfered with.
+        Example: QRM Are you being interfered with?
+
+    QRN: Are you troubled by static noise?
+        Description: This code is used to ask the other station if they are troubled by static noise.
+        Example: QRN Are you troubled by static noise?
+
+    QRO: Shall I increase power?
+        Description: This code is used to ask the other station if you should increase power.
+        Example: QRO Shall I increase power?
+
+    QRP: Shall I decrease power?
+        Description: This code is used to ask the other station if you should decrease power.
+        Example: QRP Shall I decrease power?
+
+    QRQ: Shall I send faster?
+        Description: This code is used to ask the other station if you should send faster.
+        Example: QRQ Shall I send faster?
+
+    QRS: Shall I send slower?
+        Description: This code is used to ask the other station if you should send slower.
+        Example: QRS Shall I send slower?
+
+    QRT: Shall I stop transmitting?
+        Description: This code is used to ask the other station if you should stop transmitting.
+        Example: QRT Shall I stop transmitting?
+
+    QRU: Do you have anything for me?
+        Description: This code is used to ask the other station if they have any messages or information for you.
+        Example: QRU Do you have anything for me?
+
+    QRZ: Who is calling me?
+        Description: This code is used to ask the other station about the identity of the station calling them.
+        Example: QRZ Who is calling me?
+
+    QSA: What is the strength of my signals?
+        Description: This code is used to ask the other station about the strength of your signals.
+        Example: QSA What is the strength of my signals?
+
+    QSB: Are my signals fading?
+        Description: This code is used to ask the other station if your signals are fading.
+        Example: QSB Are my signals fading?
+
+    QSD: Is my keying defective?
+        Description: This code is used to ask the other station if your keying (transmission) is defective.
+        Example: QSD Is my keying defective?
+
+    QSG: Shall I send __ messages at a time?
+        Description: This code is used to ask the other station if you should send a specific number of messages at a time.
+        Example: QSG Shall I send __ messages at a time?
+
+    QSK: Can you hear me between your signals?
+        Description: This code is used to ask the other station if they can hear you between their signals.
+        Example: QSK Can you hear me between your signals?
+
+    QSL: Can you acknowledge receipt?
+        Description: This code is used to ask the other station if they can acknowledge receipt of your message.
+        Example: QSL Can you acknowledge receipt?
+
+    QSM: Shall I repeat the last message?
+        Description: This code is used to ask the other station if you should repeat the last message.
+        Example: QSM Shall I repeat the last message?
+
+    QSN: Did you hear me?
+        Description: This code is used to ask the other station if they heard your transmission.
+        Example: QSN Did you hear me?
+
+    QSO: Can you communicate with __ direct?
+        Description: This code is used to ask the other station if they can communicate with a specific station directly.
+        Example: QSO Can you communicate with __ direct?
+
+    QSP: Will you relay a message to __?
+        Description: This code is used to ask the other station if they will relay a message to a specific station.
+        Example: QSP Will you relay a message to __?
+
+    QSR: Do you want me to repeat my call?
+        Description: This code is used to ask the other station if they want you to repeat your call.
+        Example: QSR Do you want me to repeat my call?
+
+    QSS: Shall I send slower?
+        Description: This code is used to ask the other station if you should send slower.
+        Example: QSS Shall I send slower?
+
+    QSU: Shall I send more slowly?
+        Description: This code is used to ask the other station if you should send more slowly.
+        Example: QSU Shall I send more slowly?
+
+    QSV: Shall I send __ long dashes?
+        Description: This code is used to ask the other station if you should send a specific number of long dashes.
+        Example: QSV Shall I send __ long dashes?
+
+    QSX: Will you listen on __ frequency?
+        Description: This code is used to ask the other station if they will listen on a specific frequency.
+        Example: QSX Will you listen on __ frequency?
+
+    QSY: Shall I change frequency?
+        Description: This code is used to ask the other station if you should change frequency.
+        Example: QSY Shall I change frequency?
+
+    QSZ: Shall I send each word or group more than once?
+        Description: This code is used to ask the other station if you should send each word or group more than once.
+        Example: QSZ Shall I send each word or group more than once?
+
+    QTC: How many messages have you to send?
+        Description: This code is used to ask the other station about the number of messages they have to send.
+        Example: QTC How many messages have you to send?
+
+    QTH: What is your location?
+        Description: This code is used to ask the other station about their location.
+        Example: QTH What is your location?
+
+    QTR: What is the time?
+        Description: This code is used to ask the other station about the current time.
+        Example: QTR What is the time?
+```
 (TODO)
