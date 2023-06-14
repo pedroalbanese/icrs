@@ -299,4 +299,10 @@ QTR: What is the time?
     Description: It's used to ask the other station about the current time.
     Example: QTR
 ```
-(TODO)
+
+## License
+
+This project is licensed under the ISC License.
+
+##### Military-Grade Reliability. Copyright (c) 2020-2022 ALBANESE Research Lab.
+
