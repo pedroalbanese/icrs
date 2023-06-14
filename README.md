@@ -14,6 +14,7 @@ This chat application provides a high level of security through robust encryptio
 
 Unlike other IRCs, this application does not generate logs and does not store messages on the hard drive. This means that the sender of the messages can be absolutely certain that only those present in the room will read the message, and it will no longer be accessible thereafter.
 
+### Diagram
 ```
    +-----------------------+     +----------------------+
    |   Certificate         |     |        Server        |
