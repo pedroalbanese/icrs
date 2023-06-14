@@ -139,6 +139,15 @@ There are only four commands for the client to interact with the server:
 ```
 
 ## Q Code
+
+The Q Code is a three-letter abbreviation system used in radio communications to transmit messages more efficiently and concisely. It was widely used by amateur radio operators as well as professional and military radio operators.
+
+The Q Code system was originally developed for use in radio telegraph communications, where message transmission can be slow and costly. It was created to standardize and simplify communications by allowing common information to be transmitted quickly using short combinations of letters.
+
+Each Q code starts with the letter "Q" followed by two additional letters, forming a three-letter combination. Each code has a specific meaning associated with it. For example, QTH is used to inquire about location, QSL is used to confirm receipt of a message, and QRM is used to indicate the presence of radio interference.
+
+Although the Q Code was widely used in the past, its popularity has waned over time due to the advancement of technology and the development of more sophisticated communication systems. However, it is still recognized and understood by many radio operators, especially in emergency situations or when communicating with more experienced operators.
+
 ```
     QRA: What is the name of your station?
         Description: This code is used to ask the other station about the name of their station.
