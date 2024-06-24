@@ -89,15 +89,15 @@ This program requires either the [EDGE Toolkit](https://github.com/pedroalbanese
 
 #### Asymmetric RSA keypair generation:
 ```sh
-./edgetk -pkey keygen -bits 4096 [-priv private.pem] [-pwd "pass"]
+./edgetk -pkey keygen -bits 4096 [-priv private.pem] [-pass "pass"]
 ```
 #### Generate Self Signed Certificate:
 ```sh
-./edgetk -pkey certgen -key private.pem [-pwd "pass"] [-cert "cacert.pem"]
+./edgetk -pkey certgen -key private.pem [-pass "pass"] [-cert "cacert.pem"]
 ```
 #### Generate Certificate Signing Request:
 ```sh
-./edgetk -pkey req -key private.pem [-pwd "pass"] [-cert certificate.csr]
+./edgetk -pkey req -key private.pem [-pass "pass"] [-cert certificate.csr]
 ```
 #### Sign CSR with CA Certificate:
 ```sh
